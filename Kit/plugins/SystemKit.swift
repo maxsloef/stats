@@ -39,13 +39,16 @@ public enum Platform: String, Codable {
     case m5Max
     case m5Ultra
     
+    case a18Pro
+    
     public static var apple: [Platform] {
         return [
             .m1, .m1Pro, .m1Max, .m1Ultra,
             .m2, .m2Pro, .m2Max, .m2Ultra,
             .m3, .m3Pro, .m3Max, .m3Ultra,
             .m4, .m4Pro, .m4Max, .m4Ultra,
-            .m5, .m5Pro, .m5Max, .m5Ultra
+            .m5, .m5Pro, .m5Max, .m5Ultra,
+            .a18Pro
         ]
     }
     
@@ -57,6 +60,7 @@ public enum Platform: String, Codable {
         case .m3, .m3Pro, .m3Max, .m3Ultra: return 3
         case .m4, .m4Pro, .m4Max, .m4Ultra: return 4
         case .m5, .m5Pro, .m5Max, .m5Ultra: return 5
+        case .a18Pro: return 4
         }
     }
     
@@ -82,6 +86,9 @@ public enum Platform: String, Codable {
     }
     public static var m5Gen: [Platform] {
         return [.m5, .m5Pro, .m5Max, .m5Ultra]
+    }
+    public static var a18Gen: [Platform] {
+        return [.a18Pro]
     }
     
     public static var all: [Platform] {
@@ -806,6 +813,8 @@ public class SystemKit {
                 } else {
                     return .m5
                 }
+            } else if name.contains("a18 pro") {
+                return .a18Pro
             }
         }
         return nil

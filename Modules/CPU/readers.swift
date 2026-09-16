@@ -268,6 +268,8 @@ public class TemperatureReader: Reader<Double> {
             self.list = ["Te05", "Te09", "Te0H", "Te0S", "Tp01", "Tp05", "Tp09", "Tp0D", "Tp0V", "Tp0Y", "Tp0b", "Tp0e"]
         case .m5, .m5Pro, .m5Max, .m5Ultra:
             self.list = ["Tp00", "Tp04", "Tp08", "Tp0C", "Tp0G", "Tp0K", "Tp0O", "Tp0R", "Tp0U", "Tp0X", "Tp0a", "Tp0d", "Tp0g", "Tp0j", "Tp0m", "Tp0p", "Tp0u", "Tp0y"]
+        case .a18Pro:
+            self.list = ["Te05", "Te0S", "Tp05", "Tp0D"]
         default: break
         }
     }
