@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - master
+      - ci-build-artifact
   pull_request:
     branches:
       - master
+  workflow_dispatch:
 
 concurrency:
   group: build-${{ github.ref }}
@@ -18,4 +20,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - run: xcodebuild -scheme Stats -destination 'platform=macOS' -configuration Release archive CODE_SIGNING_ALLOWED=NO
+      - run: xcodebuild -version
+      - run: xcodebuild -scheme Stats -destination 'platform=macOS' -configuration Release archive CODE_SIGNING_ALLOWED=NO -archivePath build/Stats.xcarchive
+      - run: ditto -c -k --keepParent build/Stats.xcarchive/Products/Applications/Stats.app build/Stats-unsigned.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Stats-unsigned
+          path: build/Stats-unsigned.zip
